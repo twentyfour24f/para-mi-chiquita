@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💖 Feliz Aniversario</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .hidden { display: none; }
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    canvas {
+      border-radius: 1rem;
+      max-width: 100%;
+      height: auto;
+    }
+    .heart {
+      position: fixed;
+      color: #ff4d6d;
+      font-size: 2rem;
+      animation: floatUp 2s ease-in-out forwards;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px) scale(1.5);
+      }
+    }
+
+    .fade-out {
+  animation: fadeOut 1s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+
+  </style>
+</head>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen p-4">
+  <div id="quiz" class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center fade-in">
+    <h2 class="text-2xl font-bold mb-4">❤️ Pregunta <span id="question-number">1</span></h2>
+    <p class="mb-4" id="question-text">¿Cuál fue nuestra primera cita?</p>
+    <div id="options" class="grid gap-2"></div>
+  </div>
+
+  <div id="puzzle" class="hidden bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center fade-in">
+    <h2 class="text-2xl font-bold mb-4">🧩 Rompecabezas</h2>
+    <canvas id="puzzleCanvas" width="300" height="300"></canvas>
+    <button onclick="checkPuzzle()" class="mt-4 bg-pink-500 text-white px-4 py-2 rounded-xl">Verificar</button>
+  </div>
+
+  <div id="letter" class="hidden bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center fade-in">
+    <h2 class="text-3xl font-bold mb-2">💌 Mi negrita hermosa</h2>
+    <p class="mb-4">
+
+        <br>Hoy celebramos dos meses juntos, y aunque es un tiempo que puede parecer corto, para mí han sido dos meses llenos de momentos maravillosos, de sonrisas, de risas compartidas y, sobre todo, de mucha felicidad. No sé cómo lograste que este tiempo se sintiera tan especial, pero lo has hecho, y por eso quiero aprovechar esta ocasión para decirte todo lo que siento.<br>
+        
+        <br>Desde que entraste en mi vida, todo cambió para bien. El solo hecho de pensar que estás a mi lado me llena de paz y alegría. Es impresionante cómo alguien puede llegar a hacerte sentir tan afortunado con solo su presencia, y tú, mi niña, haces eso todos los días. Cada momento a tu lado es un regalo, y no dejo de agradecer al universo por haberte cruzado en mi camino.<br>
+        
+        <br>Tu sonrisa es mi refugio, tu risa mi música favorita, y tus abrazos el lugar donde siempre quiero estar. Me haces sentir tan especial, tan querido, y me has mostrado lo que es realmente el amor. No solo eres mi novia, eres mi amiga, mi confidente, la persona que hace que todos los días valgan la pena. Cada vez que te miro, me doy cuenta de lo afortunado que soy, y me pregunto cómo pude vivir sin ti tanto tiempo. Me haces sentir completo, como nunca antes lo había hecho nadie.<br>
+        
+        <br>Estos dos meses no solo han sido una celebración del amor que compartimos, sino también de lo que somos como personas y como pareja. Hemos aprendido a conocernos más, a entendernos mejor, a apoyarnos mutuamente en todo momento. Y lo más hermoso de todo es que siento que todo esto es solo el comienzo. Imagino todo lo que vamos a vivir juntos, todas las aventuras, los sueños que vamos a cumplir, y las risas que aún nos esperan. Y quiero vivir todo eso a tu lado mi niña, porque no hay nadie con quien prefiera hacerlo que contigo.<br>
+        
+        <br>Quiero agradecerte por ser tú, por tu amor, por tu paciencia, por tus abrazos cálidos y por tu forma de hacerme sentir el hombre más afortunado del mundo. Gracias por cada beso, por cada gesto de cariño, por estar ahí cuando más te necesito. Eres mi todo, y no me canso de repetirlo.<br>
+        
+        <br>Hoy celebro estos dos meses, pero sobre todo celebro a la persona increíble que eres. Y, aunque hoy sea nuestra fecha, quiero que sepas que todos los días son un recordatorio para mí de lo bendecido que soy de tenerte en mi vida. Eres mi sol, mi luna, mi chiquita hermosa, y me haces sentir más feliz de lo que jamás imaginé.<br>
+        
+        <br>Te amo con todo mi corazón mi vida, y no puedo esperar a vivir muchos más meses, años y toda una vida a tu lado.
+        
+        Feliz 24 mi amor, te amo más de lo que las palabras pueden expresar.<br><br> Con todo mi amor, Luiggi 🐰<br></p>
+
+        <audio id="letterAudio" controls loop autoplay class="mx-auto mb-4">
+            <source src="Swimming.mp3" type="audio/mpeg">
+            Tu navegador no soporta audio.
+          </audio>
+    
+    <img src="foto (124).jpg" alt="Foto bonita" class="rounded-xl w-full h-auto mb-4" />
+    <button onclick="showVideo()" class="bg-red-500 text-white px-4 py-2 rounded-xl">💕💕💕💕💕</button>
+  </div>
+
+  <div id="video" class="hidden bg-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center fade-in">
+    <h2 class="text-2xl font-bold mb-4">🎬 Aventuraaaass</h2>
+    <video autoplay controls class="w-full rounded-xl">
+      <source src="tu-video.mp4" type="video/mp4">
+      Tu navegador no soporta video.
+    </video>
+  </div>
+
+  <div id="final" class="hidden bg-black text-white p-6 rounded-2xl shadow-xl max-w-md w-full text-center fade-in relative overflow-hidden">
+    <canvas id="fireworksCanvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+    <div class="relative z-10">
+      <h2 class="text-2xl font-bold mb-4">🎇 Gracias por vivir este detalle conmigo</h2>
+      <p class="mb-4">Te amo muchísimo, y esto apenas comienza. ❤️</p>
+      <button onclick="restartWithFade()" class="bg-pink-500 text-white px-4 py-2 rounded-xl">Volver a empezar 🔁</button>
+    </div>
+  </div>
+  
+
+  <audio id="successSound">
+    <source src="Success.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+  
+
+  <script>
+    const questions = [
+      {
+        question: "¿Cuál fue nuestra primera cita?",
+        options: ["Cine", "Restaurante", "Fiesta", "Playa"],
+        answer: "Playa"
+      },
+      {
+        question: "¿Que es lo que mas me gusta de ti?",
+        options: ["Ojos", "Sonrisa", "Cabello", "🍒🍑"],
+        answer: "Ojos"
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("question-number").textContent = currentQuestion + 1;
+      document.getElementById("question-text").textContent = q.question;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.className = "bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600";
+        btn.onclick = () => handleAnswer(option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selected) {
+      if (selected === questions[currentQuestion].answer) {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          showQuestion();
+        } else {
+          document.getElementById("quiz").classList.add("hidden");
+          document.getElementById("puzzle").classList.remove("hidden");
+          initPuzzle();
+        }
+      } else {
+        alert("¡Intenta de nuevo mi amor! 💕");
+      }
+    }
+
+    const PUZZLE_ROWS = 3; // Puedes cambiar a 4 para un 4x4
+const PUZZLE_COLS = 3;
+let pieces = [];
+let puzzleCanvas, ctx, image;
+let selectedPiece = null;
+
+function initPuzzle() {
+  puzzleCanvas = document.getElementById("puzzleCanvas");
+  ctx = puzzleCanvas.getContext("2d");
+  image = new Image();
+  image.src = "tu-foto1.png"; // Asegúrate de que esta ruta sea válida
+
+  image.onload = () => {
+    const pieceWidth = puzzleCanvas.width / PUZZLE_COLS;
+    const pieceHeight = puzzleCanvas.height / PUZZLE_ROWS;
+    pieces = [];
+
+    for (let row = 0; row < PUZZLE_ROWS; row++) {
+      for (let col = 0; col < PUZZLE_COLS; col++) {
+        pieces.push({
+          sx: col * pieceWidth,
+          sy: row * pieceHeight,
+          x: col * pieceWidth,
+          y: row * pieceHeight
+        });
+      }
+    }
+
+    shufflePieces(pieceWidth, pieceHeight);
+    drawPuzzle(pieceWidth, pieceHeight);
+  };
+
+  image.onerror = () => {
+    console.error("Error al cargar la imagen del rompecabezas");
+  };
+
+  puzzleCanvas.onclick = function (e) {
+    const rect = puzzleCanvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const pw = puzzleCanvas.width / PUZZLE_COLS;
+    const ph = puzzleCanvas.height / PUZZLE_ROWS;
+    const clicked = pieces.find(p => x > p.x && x < p.x + pw && y > p.y && y < p.y + ph);
+
+    if (clicked) {
+      if (!selectedPiece) {
+        selectedPiece = clicked;
+      } else {
+        const temp = { x: clicked.x, y: clicked.y };
+        clicked.x = selectedPiece.x;
+        clicked.y = selectedPiece.y;
+        selectedPiece.x = temp.x;
+        selectedPiece.y = temp.y;
+        selectedPiece = null;
+        drawPuzzle(pw, ph);
+      }
+    }
+  };
+}
+
+function shufflePieces(pw, ph) {
+  // Mezclar posiciones
+  const positions = pieces.map(p => ({ x: p.x, y: p.y }));
+  for (let i = positions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [positions[i], positions[j]] = [positions[j], positions[i]];
+  }
+
+  pieces.forEach((p, i) => {
+    p.x = positions[i].x;
+    p.y = positions[i].y;
+  });
+}
+
+function drawPuzzle(pw, ph) {
+  ctx.clearRect(0, 0, puzzleCanvas.width, puzzleCanvas.height);
+  for (let p of pieces) {
+    ctx.drawImage(image, p.sx, p.sy, pw, ph, p.x, p.y, pw, ph);
+
+    // Opcional: bordes para ver piezas mejor
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(p.x, p.y, pw, ph);
+  }
+}
+
+
+    function checkPuzzle() {
+      const pieceWidth = puzzleCanvas.width / PUZZLE_COLS;
+      const pieceHeight = puzzleCanvas.height / PUZZLE_ROWS;
+      const isSolved = pieces.every((p, i) => {
+        const correctX = (i % PUZZLE_COLS) * pieceWidth;
+        const correctY = Math.floor(i / PUZZLE_ROWS) * pieceHeight;
+        return p.x === correctX && p.y === correctY;
+      });
+
+      if (isSolved) {
+        createHearts();
+        document.getElementById("successSound").play();
+        setTimeout(() => {
+          document.getElementById("puzzle").classList.add("hidden");
+          document.getElementById("letter").classList.remove("hidden");
+          document.getElementById("letterAudio").play();
+
+        }, 2000);
+      } else {
+        alert("Aún no está armado, sigue intentando 💖");
+      }
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.top = "80%";
+        heart.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+
+    function startFireworks() {
+  const canvas = document.getElementById("fireworksCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  let particles = [];
+
+  function createParticle() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x,
+        y,
+        radius: Math.random() * 2 + 1,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+        angle: Math.random() * 2 * Math.PI,
+        speed: Math.random() * 2 + 1,
+        alpha: 1
+      });
+    }
+  }
+
+  function animate() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.alpha -= 0.01;
+
+      if (p.alpha <= 0) particles.splice(i, 1);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  setInterval(createParticle, 800);
+  animate();
+}
+
+    function showVideo() {
+        document.querySelector("video").addEventListener("ended", () => {
+        document.getElementById("video").classList.add("hidden");
+        document.getElementById("final").classList.remove("hidden");
+        startFireworks();
+        });
+
+      document.getElementById("letterAudio").pause();
+      document.getElementById("letter").classList.add("hidden");
+      document.getElementById("video").classList.remove("hidden");
+    }
+
+    showQuestion();
+
+    function restartWithFade() {
+  document.body.classList.add("fade-out");
+  setTimeout(() => {
+    location.reload();
+  }, 1000); // espera 1 segundo antes de recargar
+}
+
+  </script>
+</body>
+</html>
